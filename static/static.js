@@ -2,8 +2,6 @@ var path = require('path');
 var fs = require('fs');
 var URL = require('url');
 
-let staticFolders = [];
-
 //*** STUDY ***
 	//path.dirname() gives the directory
 	//require.maim gives the main module
@@ -46,9 +44,16 @@ function getPathName(url){
 	return pathname;
 }
 
-var static = module.exports = exports = {};
+function Static(){
+	this.staticFolders = [];
+}
 
-static.configureStatic = function configureStatic(folder){
+var static = module.exports = exports = function(){
+	var static = new Static();
+	return static;
+}
+
+Static.prototype.configureStatic = function configureStatic(folder){
 	if(folder){
 
 		let newFolder = formatStaticFolder(baseDir, folder);
@@ -70,8 +75,8 @@ static.configureStatic = function configureStatic(folder){
 
 		if(stats && stats.isDirectory()){
 
-			if(!staticFolders.includes(newFolder)){
-				staticFolders.push(newFolder);
+			if(!this.staticFolders.includes(newFolder)){
+				this.staticFolders.push(newFolder);
 				console.log("Static folder added: " + newFolder);
 			}else{
 				console.log("Static folder already exists: " + newFolder);
@@ -82,12 +87,12 @@ static.configureStatic = function configureStatic(folder){
 	}
 };
 
-static.folders = function * folders(){
-	console.log(staticFolders.join(","));
-	yield * staticFolders;
+Static.prototype.folders = function * folders(){
+	console.log(this.staticFolders.join(","));
+	yield * this.staticFolders;
 }
 
-static.isStatic = function isStatic(req){
+Static.prototype.isStatic = function isStatic(req){
 	if(req.method != "GET"){
 		return false;
 	}
@@ -97,8 +102,8 @@ static.isStatic = function isStatic(req){
 	return extension ? true: false;
 };
 
-static.render = function serveStatic(req, res){
-	for(let f of static.folders()){
+Static.prototype.render = function serveStatic(req, res){
+	for(let f of this.folders()){
 		var fileName = path.normalize(f + "/" + getPathName(req.url));
 		if(fs.existsSync(fileName)){
 			//*** STUDY ***
