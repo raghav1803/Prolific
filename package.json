@@ -1,0 +1,39 @@
+{
+  "name": "prolific",
+  "version": "1.0.0",
+  "description": "A personal lifestyle manager: A super efficient way to organize your life!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raghav1803/Prolific.git"
+  },
+  "keywords": [
+    "todo",
+    "lifestyle",
+    "organize",
+    "productivity",
+    "goals",
+    "projects",
+    "projects",
+    "management",
+    "manager",
+    "time",
+    "task",
+    "time",
+    "manager",
+    "task",
+    "manager"
+  ],
+  "author": "appGenius",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raghav1803/Prolific/issues"
+  },
+  "homepage": "https://github.com/raghav1803/Prolific#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}

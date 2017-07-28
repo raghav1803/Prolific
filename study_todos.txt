@@ -1,0 +1,4 @@
+Things to do
+
+1. Explore callback on HTTP server listen event
+2. Can the port collide, how to change it, and how to pass it in from the env
